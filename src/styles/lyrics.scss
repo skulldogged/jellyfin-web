@@ -13,24 +13,127 @@
 
 .lyricsLine {
     display: inline-block;
-    width: fit-content;
+    width: 100% !important;
     margin: 0.1em;
     font-size: 1.875rem;
     color: inherit;
     min-height: 2em;
-
-    transition-property: opacity;
-    transition-duration: 150ms;
-}
-
-.futureLyric {
-    opacity: 0.3;
-}
-
-.pastLyric {
-    opacity: 0.7;
+    text-align: left !important;
+    padding-left: 5% !important;
+    padding-right: 25% !important;
+    box-sizing: border-box !important;
+    transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    opacity: 0.35;
 }
 
 .dynamicLyric {
     cursor: pointer;
+}
+
+/* TTML Word-Sync Cues and Section styling */
+.lyricCue {
+    position: relative;
+    display: inline-block;
+}
+
+.lyricCueBackground {
+    color: rgba(255, 255, 255, 0.35);
+    white-space: pre;
+}
+
+.lyricCueForeground {
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #fff;
+    white-space: pre;
+    clip-path: inset(0 100% 0 0);
+    transition: none;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8), 0 0 16px rgba(0, 164, 220, 0.5);
+    pointer-events: none;
+}
+
+.futureLyric {
+    opacity: 0.3;
+
+    .lyricCueForeground {
+        display: none !important;
+    }
+
+    .lyricCueBackground {
+        color: rgba(255, 255, 255, 0.35) !important;
+    }
+}
+
+.pastLyric {
+    opacity: 0.7;
+
+    .lyricCueForeground {
+        display: none !important;
+    }
+
+    .lyricCueBackground {
+        color: rgba(255, 255, 255, 0.35) !important;
+    }
+}
+
+.lyricSectionHeader {
+    font-size: 1.1em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(255, 255, 255, 0.35);
+    margin-top: 2.2em;
+    margin-bottom: 0.8em;
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.hasMultiAgent .lyricSectionHeader {
+    text-align: left;
+    padding-left: 5%;
+}
+
+.lyricsLine:not(.pastLyric):not(.futureLyric) {
+    opacity: 1;
+}
+
+.hasMultiAgent .lyricsLine.lyricSecondary {
+    text-align: right !important;
+    padding-left: 25% !important;
+    padding-right: 5% !important;
+}
+
+.lyricPreferenceToggle {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 1.5em auto;
+    width: fit-content;
+}
+
+.lyricPrefBtn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.6);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    outline: none;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.15);
+        color: #fff;
+    }
+
+    &.active {
+        background: #00a4dc;
+        border-color: #00a4dc;
+        color: #fff;
+        box-shadow: 0 0 10px rgba(0, 164, 220, 0.4);
+    }
 }
